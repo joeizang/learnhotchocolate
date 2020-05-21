@@ -1,0 +1,12 @@
+version: "3"
+services:
+  learnchocodb:
+    image: "postgres"
+    env_file:
+      - database.env
+    volumes:
+      - learnchoco-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  learnchoco-data:
