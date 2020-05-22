@@ -30,9 +30,9 @@
     </v-app-bar>
 
     <v-content>
-      <v-card width="400" class="mx-auto mt-12">
+      <v-card width="400" class="mx-auto mt-12 p10">
         <v-card-title>
-          <h1 class="display-1">Welcome, Sign in</h1>
+          <h2 class="display-1">Welcome, Sign in</h2>
         </v-card-title>
         <v-card-text>
           <v-form>
@@ -46,6 +46,7 @@
           <v-spacer></v-spacer>
           <v-btn dark large color="info">Login</v-btn>
         </v-card-actions>
+        <v-spacer></v-spacer>
       </v-card>
     </v-content>
   </v-app>
@@ -64,6 +65,6 @@ export default Vue.extend({
 
   data: () => ({
     //
-  }),
+  })
 });
 </script>
