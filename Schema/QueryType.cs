@@ -8,7 +8,8 @@ namespace learnhotchocolate.Schema
         {
             base.Configure(descriptor);
 
-            descriptor.Field(inv => inv.GetAllIncomes(default!))
+            descriptor.Field(inv => inv.Incomes(default!))
+                .UseFiltering()
                 .Type<NonNullType<ListType<IncomeType>>>();
             descriptor.Field(inv => inv.GetIncomeById(default!, default!))
                 .Argument("id", x => x.Type<NonNullType<StringType>>());

@@ -10,7 +10,7 @@ namespace learnhotchocolate.Schema
 {
     public class Query
     {
-        public async Task<List<Income>> GetAllIncomes([Service] LearnHotChocolateContext db)
+        public async Task<List<Income>> Incomes([Service] LearnHotChocolateContext db)
         {
             return await db.Incomes.AsNoTracking()
                 .Include(x => x.IncomeCategory)

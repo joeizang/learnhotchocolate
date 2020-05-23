@@ -30,21 +30,19 @@
     </v-app-bar>
 
     <v-content>
-      <v-card width="400" class="mx-auto mt-12 p10">
+      <v-card width="300" class="mx-auto mt-12 p10" v-for="income in incomes" :key="income.id">
         <v-card-title>
-          <h2 class="display-1">Welcome, Sign in</h2>
+          <h4 class="headline">Payer: {{ income.incomeSource.name }}</h4>
         </v-card-title>
         <v-card-text>
-          <v-form>
-            <v-text-field label="Username" prepend-icon="mdi-account-circle" />
-            <v-text-field label="Password" type="password" prepend-icon="mdi-lock" append-icon="mdi-eye-off" />
-          </v-form>
+          <span><v-icon light left large>currency-ngn</v-icon>{{ new Intl.NumberFormat().format(income.amount) }}</span>
+          <v-spacer></v-spacer>
+          <span>{{ new Date(Date.parse(income.incomeDate)) }}</span>
         </v-card-text>
         <v-spacer></v-spacer>
         <v-card-actions>
-          <v-btn dark large color="success">Register</v-btn>
+          <v-btn dark large color="success">Print</v-btn>
           <v-spacer></v-spacer>
-          <v-btn dark large color="info">Login</v-btn>
         </v-card-actions>
         <v-spacer></v-spacer>
       </v-card>
@@ -54,17 +52,29 @@
 
 <script lang="ts">
 import Vue from "vue";
-//import HelloWorld from "./components/HelloWorld.vue";
+import gql from "graphql-tag";
 
 export default Vue.extend({
   name: "App",
-
-  components: {
-    //HelloWorld
+  apollo: {
+    incomes: gql`
+      query {
+        incomes {
+          id
+          amount
+          incomeDate
+          incomeSource {
+            name
+          }
+        }
+      }
+    `,
   },
+  components: {},
 
   data: () => ({
     //
-  })
+  }),
+  computed: {},
 });
 </script>

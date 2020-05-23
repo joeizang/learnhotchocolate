@@ -28,6 +28,15 @@ namespace learnhotchocolate
                 options
                 .UseNpgsql("Host=127.0.0.1;Database=learnchocodb;Port=5432;UserId=postgres;Password=testpass");
             });
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(p =>
+                {
+                    p.WithOrigins("http://localhost:8080")
+                     .AllowAnyHeader().AllowAnyOrigin()
+                     .AllowAnyMethod();
+                });
+            });
             services.AddGraphQL(
                 SchemaBuilder.New()
                 .AddQueryType<QueryType>()
@@ -45,7 +54,9 @@ namespace learnhotchocolate
             }
 
             app
-            .UseRouting()
+            .UseCors()
+            .UseRouting();
+            app
             .UseWebSockets()
             .UseGraphQL()
             .UsePlayground();
