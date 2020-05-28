@@ -1,0 +1,183 @@
+# The cost directives is used to express the complexity of a field.
+directive @cost(
+  # Defines the complexity of the field.
+  complexity: Int! = 1
+  # Defines field arguments that act as complexity multipliers.
+  multipliers: [MultiplierPath!]
+) on FIELD_DEFINITION
+# The `DateTime` scalar represents
+ an ISO-8601 compliant date time type.
+scalar DateTime
+
+# The built-in `Decimal` scalar type
+.
+scalar Decimal
+
+type Income {
+  amount: Decimal!
+  createdAt: DateTime
+  description: String
+  id: String!
+  incomeCategory: IncomeCategory
+  incomeCategoryId: String
+  incomeDate: DateTime!
+  incomeSource: IncomeSource
+  incomeSourceId: String
+  updatedAt: DateTime
+}
+
+type IncomeCategory {
+  createdAt: DateTime
+  id: String!
+  incomeCategoryName: String!
+  incomes: [Income]
+  updatedAt: DateTime
+}
+
+input IncomeCategoryInputModelInput {
+  categoryName: String!
+}
+
+input IncomeDeleteModelInput {
+  incomeId: String!
+}
+
+input IncomeFilter {
+  amount: Decimal
+  amount_gt: Decimal
+  amount_gte: Decimal
+  amount_in: [Decimal!]
+  amount_lt: Decimal
+  amount_lte: Decimal
+  amount_not: Decimal
+  amount_not_gt: Decimal
+  amount_not_gte: Decimal
+  amount_not_in: [Decimal!]
+  amount_not_lt: Decimal
+  amount_not_lte: Decimal
+  AND: [IncomeFilter!]
+  createdAt: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_not: DateTime
+  createdAt_not_gt: DateTime
+  createdAt_not_gte: DateTime
+  createdAt_not_in: [DateTime!]
+  createdAt_not_lt: DateTime
+  createdAt_not_lte: DateTime
+  description: String
+  description_contains: String
+  description_ends_with: String
+  description_in: [String!]
+  description_not: String
+  description_not_contains: String
+  description_not_ends_with: String
+  description_not_in: [String!]
+  description_not_starts_with: String
+  description_starts_with: String
+  id: String
+  id_contains: String
+  id_ends_with: String
+  id_in: [String!]
+  id_not: String
+  id_not_contains: String
+  id_not_ends_with: String
+  id_not_in: [String!]
+  id_not_starts_with: String
+  id_starts_with: String
+  incomeCategoryId: String
+  incomeCategoryId_contains: String
+  incomeCategoryId_ends_with: String
+  incomeCategoryId_in: [String!]
+  incomeCategoryId_not: String
+  incomeCategoryId_not_contains: String
+  incomeCategoryId_not_ends_with: String
+  incomeCategoryId_not_in: [String!]
+  incomeCategoryId_not_starts_with: String
+  incomeCategoryId_starts_with: String
+  incomeDate: DateTime
+  incomeDate_gt: DateTime
+  incomeDate_gte: DateTime
+  incomeDate_in: [DateTime!]
+  incomeDate_lt: DateTime
+  incomeDate_lte: DateTime
+  incomeDate_not: DateTime
+  incomeDate_not_gt: DateTime
+  incomeDate_not_gte: DateTime
+  incomeDate_not_in: [DateTime!]
+  incomeDate_not_lt: DateTime
+  incomeDate_not_lte: DateTime
+  incomeSourceId: String
+  incomeSourceId_contains: String
+  incomeSourceId_ends_with: String
+  incomeSourceId_in: [String!]
+  incomeSourceId_not: String
+  incomeSourceId_not_contains: String
+  incomeSourceId_not_ends_with: String
+  incomeSourceId_not_in: [String!]
+  incomeSourceId_not_starts_with: String
+  incomeSourceId_starts_with: String
+  OR: [IncomeFilter!]
+  updatedAt: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_not: DateTime
+  updatedAt_not_gt: DateTime
+  updatedAt_not_gte: DateTime
+  updatedAt_not_in: [DateTime!]
+  updatedAt_not_lt: DateTime
+  updatedAt_not_lte: DateTime
+}
+
+input IncomeInputModelInput {
+  amount: Decimal!
+  categoryModel: IncomeCategoryInputModelInput!
+  date: DateTime!
+  description: String!
+  sourceModel: IncomeSourceInputModelInput!
+}
+
+type IncomeSource {
+  createdAt: DateTime!
+  id: String!
+  name: String
+  phoneNumber: String
+  updatedAt: DateTime!
+}
+
+input IncomeSourceInputModelInput {
+  name: String!
+  phoneNumber: String
+}
+
+input IncomeUpdateModelInput {
+  amount: Decimal!
+  categoryModel: IncomeCategoryInputModelInput!
+  date: DateTime!
+  description: String!
+  incomeId: String!
+  sourceModel: IncomeSourceInputModelInput!
+}
+
+# The multiplier path scalar represents
+ a valid GraphQL multiplier path string.
+scalar MultiplierPath
+
+type Mutation {
+  createIncome(model: IncomeInputModelInput!): Income!
+  deleteIncome(model: IncomeDeleteModelInput!): Income!
+  updateIncome(model: IncomeUpdateModelInput!): Income!
+}
+
+type Query {
+  incomeById(id: String!): Income!
+  incomeCategories: [IncomeCategory]!
+  incomes(where: IncomeFilter): [Income]!
+}
+

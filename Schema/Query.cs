@@ -27,5 +27,12 @@ namespace learnhotchocolate.Schema
                 .SingleOrDefaultAsync(t => t.Id.Equals(id))
                 .ConfigureAwait(false);
         }
+
+        public async Task<List<IncomeCategory>> IncomeCategories([Service] LearnHotChocolateContext db)
+        {
+            return await db.IncomeCategories.AsNoTracking()
+                    .OrderBy(ic => ic.IncomeCategoryName)
+                    .ToListAsync();
+        }
     }
 }

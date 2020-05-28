@@ -30,18 +30,21 @@
     </v-app-bar>
 
     <v-content>
+      <CreateIncome></CreateIncome>
       <v-card width="300" class="mx-auto mt-12 p10" v-for="income in incomes" :key="income.id">
         <v-card-title>
           <h4 class="headline">Payer: {{ income.incomeSource.name }}</h4>
         </v-card-title>
         <v-card-text>
-          <span><v-icon light left large>currency-ngn</v-icon>{{ new Intl.NumberFormat().format(income.amount) }}</span>
+          <span class="body-1"
+            ><v-icon light left>mdi-currency-ngn</v-icon>{{ new Intl.NumberFormat().format(income.amount) }}</span
+          >
           <v-spacer></v-spacer>
           <span>{{ new Date(Date.parse(income.incomeDate)) }}</span>
         </v-card-text>
         <v-spacer></v-spacer>
         <v-card-actions>
-          <v-btn dark large color="success">Print</v-btn>
+          <v-btn light large color="success">Print</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
         <v-spacer></v-spacer>
@@ -53,12 +56,13 @@
 <script lang="ts">
 import Vue from "vue";
 import gql from "graphql-tag";
+import CreateIncome from "@/components/CreateIncome.vue";
 
 export default Vue.extend({
   name: "App",
   apollo: {
     incomes: gql`
-      query {
+      query getAllIncome {
         incomes {
           id
           amount
@@ -70,7 +74,7 @@ export default Vue.extend({
       }
     `,
   },
-  components: {},
+  components: { CreateIncome },
 
   data: () => ({
     //
